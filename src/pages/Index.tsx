@@ -2,20 +2,56 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
-import { X, Leaf, Mountain, Home, Star, ArrowRight, CheckCircle, Menu, Phone, Mail, MapPin, Heart, Wind, Sun, Moon, Waves, Bed, Building, Sparkles } from "lucide-react";
-import { FaWifi, FaSnowflake, FaUtensils, FaCoffee, FaConciergeBell, FaPhone, FaEnvelope, FaMapMarkerAlt, FaTree, FaWater, FaMountain, FaSpa, FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import {
+  X,
+  Leaf,
+  Mountain,
+  Home,
+  Star,
+  ArrowRight,
+  CheckCircle,
+  Menu,
+  Phone,
+  Mail,
+  MapPin,
+  Heart,
+  Wind,
+  Sun,
+  Moon,
+  Waves,
+  Bed,
+  Building,
+  Sparkles,
+} from "lucide-react";
+import {
+  FaWifi,
+  FaSnowflake,
+  FaUtensils,
+  FaCoffee,
+  FaConciergeBell,
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaTree,
+  FaWater,
+  FaMountain,
+  FaSpa,
+  FaFacebook,
+  FaInstagram,
+  FaWhatsapp,
+} from "react-icons/fa";
 
 // Import images
-import logoImg from '../assets/logo.jpeg';
-import heroBannerImg from '../assets/heroBanner.png';
-import img1 from '../assets/WhatsApp Image 2025-11-28 at 1.08.01 PM.jpeg';
-import img2 from '../assets/WhatsApp Image 2025-11-28 at 1.08.02 PM.jpeg';
-import img3 from '../assets/WhatsApp Image 2025-11-28 at 1.08.03 PM.jpeg';
-import img4 from '../assets/WhatsApp Image 2025-11-28 at 1.08.04 PM.jpeg';
-import img5 from '../assets/WhatsApp Image 2025-11-28 at 1.08.05 PM.jpeg';
-import img6 from '../assets/WhatsApp Image 2025-11-28 at 1.08.06 PM.jpeg';
-import img7 from '../assets/WhatsApp Image 2025-11-28 at 1.08.07 PM.jpeg';
-import img8 from '../assets/WhatsApp Image 2025-11-28 at 1.08.08 PM.jpeg';
+import logoImg from "../assets/logo.jpeg";
+import heroBannerImg from "../assets/heroBanner.png";
+import img1 from "../assets/WhatsApp Image 2025-11-28 at 1.08.01 PM.jpeg";
+import img2 from "../assets/WhatsApp Image 2025-11-28 at 1.08.02 PM.jpeg";
+import img3 from "../assets/WhatsApp Image 2025-11-28 at 1.08.03 PM.jpeg";
+import img4 from "../assets/WhatsApp Image 2025-11-28 at 1.08.04 PM.jpeg";
+import img5 from "../assets/WhatsApp Image 2025-11-28 at 1.08.05 PM.jpeg";
+import img6 from "../assets/WhatsApp Image 2025-11-28 at 1.08.06 PM.jpeg";
+import img7 from "../assets/WhatsApp Image 2025-11-28 at 1.08.07 PM.jpeg";
+import img8 from "../assets/WhatsApp Image 2025-11-28 at 1.08.08 PM.jpeg";
 
 // Type definitions
 type UseScrollRevealOptions = {
@@ -49,7 +85,10 @@ const useScrollReveal = (options?: UseScrollRevealOptions) => {
     return () => observer.disconnect();
   }, [threshold, root, rootMargin]);
 
-  return { elementRef: elementRef as React.RefObject<HTMLDivElement>, isVisible };
+  return {
+    elementRef: elementRef as React.RefObject<HTMLDivElement>,
+    isVisible,
+  };
 };
 
 const Index: React.FC = () => {
@@ -83,16 +122,16 @@ const Index: React.FC = () => {
         className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
       >
         <div className="flex flex-col items-center space-y-8">
-          <motion.div
-            className="relative"
-          >
+          <motion.div className="relative">
             <div className="w-20 h-20 bg-gradient-to-br from-gray-600 to-gray-700 rounded-full flex items-center justify-center shadow-lg">
               <Home className="w-10 h-10 text-white" />
             </div>
           </motion.div>
 
           <motion.div className="text-center">
-            <h1 className="text-3xl font-bold gradient-text mb-2">Subramaniyam Residency</h1>
+            <h1 className="text-3xl font-bold gradient-text mb-2">
+              Subramaniyam Residency
+            </h1>
             <p className="text-lg text-gray-600">Residental Comfort Awaits</p>
           </motion.div>
 
@@ -146,13 +185,23 @@ const Index: React.FC = () => {
       >
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center space-x-3 cursor-pointer"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center space-x-3 cursor-pointer"
+            >
+              <img
+                src={logoImg}
+                alt="Logo"
+                className="w-8 h-17 rounded-full object-contain"
+              />
+              <span
+                className={`text-xl font-semibold ${
+                  scrolled ? "text-black" : "text-white"
+                }`}
               >
-                <img src={logoImg} alt="Logo" className="w-8 h-17 rounded-full object-contain" />
-                <span className={`text-xl font-semibold ${scrolled ? 'text-black' : 'text-white'}`}>SIVA SUBRAMANIYAR</span>
-              </motion.div>
+                SIVA SUBRAMANIYAR
+              </span>
+            </motion.div>
 
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
@@ -160,22 +209,28 @@ const Index: React.FC = () => {
                   key={item.id}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" })}
-                  className={`${scrolled ? 'text-gray-900' : 'text-white'} hover:text-green-600 transition-colors duration-300 relative group font-medium`}
+                  onClick={() =>
+                    document
+                      .getElementById(item.id)
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
+                  className={`${
+                    scrolled ? "text-gray-900" : "text-white"
+                  } hover:text-green-600 transition-colors duration-300 relative group font-medium`}
                 >
                   {item.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full rounded-full" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full rounded-full" />
                 </motion.button>
               ))}
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => document.getElementById("spaces")?.scrollIntoView({ behavior: "smooth" })}
-                className="btn-primary shadow-lg hover:shadow-xl"
-              >
-                Book Now
-              </motion.button>
+             <motion.button
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  onClick={() => window.location.href = "https://jkglobalitsolutions.github.io/Subramaniyam-website-dynamic-link/"}
+  className="btn-primary shadow-lg hover:shadow-xl"
+>
+  Book Now
+</motion.button>
             </div>
 
             <button
@@ -202,17 +257,23 @@ const Index: React.FC = () => {
                   <button
                     key={item.id}
                     onClick={() => {
-                      document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" });
+                      document
+                        .getElementById(item.id)
+                        ?.scrollIntoView({ behavior: "smooth" });
                       setMobileMenuOpen(false);
                     }}
-                    className={`block w-full text-left py-2 hover:text-green-600 transition-colors font-medium ${scrolled ? 'text-gray-900' : 'text-white'}`}
+                    className={`block w-full text-left py-2 hover:text-green-600 transition-colors font-medium ${
+                      scrolled ? "text-gray-900" : "text-white"
+                    }`}
                   >
                     {item.label}
                   </button>
                 ))}
                 <button
                   onClick={() => {
-                    document.getElementById("spaces")?.scrollIntoView({ behavior: "smooth" });
+                    document
+                      .getElementById("spaces")
+                      ?.scrollIntoView({ behavior: "smooth" });
                     setMobileMenuOpen(false);
                   }}
                   className="w-full btn-primary mt-4"
@@ -229,11 +290,17 @@ const Index: React.FC = () => {
 
   // Unique Hero Section
   const Hero: React.FC = () => {
-
     return (
-      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section
+        id="hero"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      >
         {/* Background Image */}
-        <img src={heroBannerImg} alt="Hero Banner" className="absolute inset-0 w-full h-full object-cover" />
+        <img
+          src={heroBannerImg}
+          alt="Hero Banner"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
 
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
 
@@ -271,7 +338,11 @@ const Index: React.FC = () => {
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => document.getElementById("spaces")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() =>
+                  document
+                    .getElementById("spaces")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
                 className="btn-primary text-lg px-8 py-4 shadow-2xl"
               >
                 Explore Rooms
@@ -281,7 +352,11 @@ const Index: React.FC = () => {
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => document.getElementById("amenities")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() =>
+                  document
+                    .getElementById("amenities")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
                 className="btn-secondary text-lg px-8 py-4"
               >
                 Our Amenities
@@ -331,23 +406,27 @@ const Index: React.FC = () => {
                 </motion.div>
 
                 <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Where Luxury Meets <span className="gradient-text">Comfort</span>
+                  Where Luxury Meets{" "}
+                  <span className="gradient-text">Comfort</span>
                 </h2>
 
                 <p className="text-lg text-gray-200 leading-relaxed">
-                  Subramaniyam Residency embodies the perfect balance between modern comfort and
-                  tranquil environment. Our thoughtfully designed spaces invite you to relax and
-                  enjoy contemporary amenities.
+                  Subramaniyam Residency embodies the perfect balance between
+                  modern comfort and tranquil environment. Our thoughtfully
+                  designed spaces invite you to relax and enjoy contemporary
+                  amenities.
                 </p>
 
                 <div className="grid grid-cols-2 gap-6 pt-6">
                   <div className="text-center">
-                  <div className="text-3xl font-bold text-white-900">500+</div>
-                  <div className="text-gray-200">Happy Guests</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-white-900">98%</div>
-                  <div className="text-gray-200">Satisfaction</div>
+                    <div className="text-3xl font-bold text-white-900">
+                      500+
+                    </div>
+                    <div className="text-gray-200">Happy Guests</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-white-900">98%</div>
+                    <div className="text-gray-200">Satisfaction</div>
                   </div>
                 </div>
               </div>
@@ -390,7 +469,11 @@ const Index: React.FC = () => {
                 <motion.div
                   className="absolute -top-4 -right-4 bg-white p-4 rounded-xl shadow-xl"
                   animate={{ rotate: [-2, 2, -2] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 >
                   <div className="flex items-center space-x-2">
                     <Star className="w-5 h-5 text-yellow-400 fill-current" />
@@ -399,7 +482,9 @@ const Index: React.FC = () => {
                     <Star className="w-5 h-5 text-yellow-400 fill-current" />
                     <Star className="w-5 h-5 text-yellow-400 fill-current" />
                   </div>
-                  <p className="text-sm font-medium mt-1 text-gray-900">Exceptional Experience</p>
+                  <p className="text-sm font-medium mt-1 text-gray-900">
+                    Exceptional Experience
+                  </p>
                 </motion.div>
               </div>
             </motion.div>
@@ -411,8 +496,10 @@ const Index: React.FC = () => {
 
   // Interactive Spaces Section
   const Spaces: React.FC = () => {
-    const { elementRef: headerRef, isVisible: headerVisible } = useScrollReveal();
-    const { elementRef: spacesRef, isVisible: spacesVisible } = useScrollReveal();
+    const { elementRef: headerRef, isVisible: headerVisible } =
+      useScrollReveal();
+    const { elementRef: spacesRef, isVisible: spacesVisible } =
+      useScrollReveal();
 
     const spaces = [
       {
@@ -429,7 +516,12 @@ const Index: React.FC = () => {
         id: 2,
         name: "Suite Room",
         icon: Home,
-        features: ["King + Single Bed", "AC Available", "TV Included", "Coffee Maker"],
+        features: [
+          "King + Single Bed",
+          "AC Available",
+          "TV Included",
+          "Coffee Maker",
+        ],
         price: "₹4,500 (AC) / ₹3,750 (Non-AC)",
         description: "Comfort for 3 adults + 1 child",
         available: 2,
@@ -438,7 +530,12 @@ const Index: React.FC = () => {
         id: 3,
         name: "Standard Room",
         icon: Bed,
-        features: ["King Size Bed", "AC Available", "TV Included", "Room Heater"],
+        features: [
+          "King Size Bed",
+          "AC Available",
+          "TV Included",
+          "Room Heater",
+        ],
         price: "₹3,000 (AC) / ₹2,500 (Non-AC)",
         description: "Cozy space for 2 adults + 1 child",
         available: 18,
@@ -452,7 +549,10 @@ const Index: React.FC = () => {
           <motion.div
             ref={headerRef}
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: headerVisible ? 1 : 0, y: headerVisible ? 0 : 30 }}
+            animate={{
+              opacity: headerVisible ? 1 : 0,
+              y: headerVisible ? 0 : 30,
+            }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16 animate-slide-up"
           >
@@ -469,8 +569,8 @@ const Index: React.FC = () => {
             </h2>
 
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Each room is thoughtfully designed to offer comfort and convenience
-              with modern amenities and hospitable service.
+              Each room is thoughtfully designed to offer comfort and
+              convenience with modern amenities and hospitable service.
             </p>
           </motion.div>
 
@@ -482,7 +582,10 @@ const Index: React.FC = () => {
                 <motion.div
                   key={space.id}
                   initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: spacesVisible ? 1 : 0, y: spacesVisible ? 0 : 50 }}
+                  animate={{
+                    opacity: spacesVisible ? 1 : 0,
+                    y: spacesVisible ? 0 : 50,
+                  }}
                   transition={{ delay: index * 0.2, duration: 0.2 }}
                   whileHover={{ y: -10 }}
                   className="card-hover group bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 border border-gray-200 hover:border-green-300 transition-all duration-500 shadow-lg hover:shadow-2xl"
@@ -496,8 +599,12 @@ const Index: React.FC = () => {
                       <Icon className="w-8 h-8 text-white" />
                     </motion.div>
 
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{space.name}</h3>
-                    <p className="text-lg font-semibold text-gray-900 mb-4">{space.price}</p>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                      {space.name}
+                    </h3>
+                    <p className="text-lg font-semibold text-gray-900 mb-4">
+                      {space.price}
+                    </p>
                     <p className="text-gray-600 mb-6">{space.description}</p>
                   </div>
 
@@ -519,7 +626,10 @@ const Index: React.FC = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => navigate('/booking')}
+                    onClick={() =>
+                      (window.location.href =
+                        "https://jkglobalitsolutions.github.io/Subramaniyam-website-dynamic-link/")
+                    }
                     className="w-full mt-6 btn-primary"
                   >
                     Reserve Now
@@ -538,16 +648,43 @@ const Index: React.FC = () => {
     const { elementRef: ref, isVisible } = useScrollReveal();
 
     const amenities = [
-      { icon: FaConciergeBell, title: "24/7 Service Desk", description: "Round-the-clock assistance and concierge" },
-      { icon: FaSnowflake, title: "AC/Non-AC Options", description: "Choose comfortable climate control" },
-      { icon: FaMountain, title: "TV in Rooms", description: "Entertainment and local channels" },
-      { icon: FaCoffee, title: "Tea/Coffee Maker", description: "Complimentary hot beverages" },
-      { icon: FaWifi, title: "Free Wi-Fi", description: "High-speed internet throughout property" },
-      { icon: FaSpa, title: "Room Heater", description: "Warm comfort during cool evenings" },
+      {
+        icon: FaConciergeBell,
+        title: "24/7 Service Desk",
+        description: "Round-the-clock assistance and concierge",
+      },
+      {
+        icon: FaSnowflake,
+        title: "AC/Non-AC Options",
+        description: "Choose comfortable climate control",
+      },
+      {
+        icon: FaMountain,
+        title: "TV in Rooms",
+        description: "Entertainment and local channels",
+      },
+      {
+        icon: FaCoffee,
+        title: "Tea/Coffee Maker",
+        description: "Complimentary hot beverages",
+      },
+      {
+        icon: FaWifi,
+        title: "Free Wi-Fi",
+        description: "High-speed internet throughout property",
+      },
+      {
+        icon: FaSpa,
+        title: "Room Heater",
+        description: "Warm comfort during cool evenings",
+      },
     ];
 
     return (
-      <section id="amenities" className="py-24 px-6 bg-gradient-to-b from-gray-50 to-white">
+      <section
+        id="amenities"
+        className="py-24 px-6 bg-gradient-to-b from-gray-50 to-white"
+      >
         <div className="container mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -568,8 +705,8 @@ const Index: React.FC = () => {
             </h2>
 
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Every detail is thoughtfully designed to enhance your comfort
-              and provide convenient services.
+              Every detail is thoughtfully designed to enhance your comfort and
+              provide convenient services.
             </p>
           </motion.div>
 
@@ -582,13 +719,13 @@ const Index: React.FC = () => {
                   opacity: 1,
                   scale: 1,
                   rotate: 0,
-                  y: [0, -10, 0]
+                  y: [0, -10, 0],
                 }}
                 transition={{
                   delay: index * 0.15,
                   duration: 0.6,
                   type: "spring",
-                  y: { duration: 3, repeat: Infinity, delay: index * 0.2 }
+                  y: { duration: 3, repeat: Infinity, delay: index * 0.2 },
                 }}
                 whileHover={{ y: -8, scale: 1.02 }}
                 className="group relative bg-white rounded-2xl p-8 border border-gray-200 hover:border-blue-300 transition-all duration-500 hover:shadow-xl"
@@ -602,8 +739,12 @@ const Index: React.FC = () => {
                   </motion.div>
 
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">{amenity.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{amenity.description}</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-1">
+                      {amenity.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {amenity.description}
+                    </p>
                   </div>
                 </div>
 
@@ -631,7 +772,11 @@ const Index: React.FC = () => {
         duration: "2-3 hours",
         difficulty: "Easy",
         hours: "6 AM - 7 PM",
-        highlights: ["Spiritual retreat", "Ramana Maharshi teachings", "Peaceful meditation"],
+        highlights: [
+          "Spiritual retreat",
+          "Ramana Maharshi teachings",
+          "Peaceful meditation",
+        ],
       },
       {
         name: "Arunachaleshwarar Temple",
@@ -639,7 +784,11 @@ const Index: React.FC = () => {
         duration: "3-4 hours",
         difficulty: "Easy",
         hours: "6 AM - 8 PM",
-        highlights: ["Ancient temple", "Spiritual significance", "Cultural heritage"],
+        highlights: [
+          "Ancient temple",
+          "Spiritual significance",
+          "Cultural heritage",
+        ],
       },
       {
         name: "Sathanur Dam",
@@ -659,159 +808,177 @@ const Index: React.FC = () => {
       },
     ];
 
-            return (
-              <section id="tours" className="py-24 px-6 bg-white">
-                <div className="container mx-auto max-w-6xl">
-                  {/* Exploration Section */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-center mb-16"
-                  >
-                    <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4">
-                      <MapPin className="w-4 h-4 mr-2" />
-                      Nature Adventures
+    return (
+      <section id="tours" className="py-24 px-6 bg-white">
+        <div className="container mx-auto max-w-6xl">
+          {/* Exploration Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4">
+              <MapPin className="w-4 h-4 mr-2" />
+              Nature Adventures
+            </div>
+
+            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+              Explore Beyond <span className="gradient-text">Boundaries</span>
+            </h2>
+
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Discover the natural wonders and spiritual landmarks that surround
+              our residency.
+            </p>
+          </motion.div>
+
+          <div ref={ref} className="grid md:grid-cols-2 gap-8 mb-16">
+            {destinations.map((dest, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: index * 0.2, duration: 0.8 }}
+                className="relative group"
+              >
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-gray-200 hover:border-blue-300 transition-all duration-500 card-hover">
+                  <div className="text-center mb-6">
+                    <div
+                      className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold mb-3 ${
+                        dest.difficulty === "Easy"
+                          ? "bg-green-100 text-green-700"
+                          : dest.difficulty === "Moderate"
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      {dest.difficulty}
                     </div>
 
-                    <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-                      Explore Beyond <span className="gradient-text">Boundaries</span>
-                    </h2>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                      {dest.name}
+                    </h3>
+                    <div className="flex justify-between text-sm text-gray-600 mb-4">
+                      <span>{dest.distance}</span>
+                      <span>{dest.duration}</span>
+                    </div>
+                    <div className="text-sm text-gray-600 mb-4">
+                      <span>Hours: {dest.hours}</span>
+                    </div>
+                  </div>
 
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                      Discover the natural wonders and spiritual landmarks that surround our residency.
+                  <div className="space-y-3 mb-6">
+                    <p className="font-semibold text-gray-900 mb-2">
+                      Highlights:
                     </p>
-                  </motion.div>
-
-                  <div ref={ref} className="grid md:grid-cols-2 gap-8 mb-16">
-                    {destinations.map((dest, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                        transition={{ delay: index * 0.2, duration: 0.8 }}
-                        className="relative group"
+                    {dest.highlights.map((highlight, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center space-x-2 text-sm text-gray-700"
                       >
-                        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-gray-200 hover:border-blue-300 transition-all duration-500 card-hover">
-                          <div className="text-center mb-6">
-                            <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold mb-3 ${
-                              dest.difficulty === 'Easy' ? 'bg-green-100 text-green-700' :
-                              dest.difficulty === 'Moderate' ? 'bg-yellow-100 text-yellow-700' :
-                              'bg-red-100 text-red-700'
-                            }`}>
-                              {dest.difficulty}
-                            </div>
-
-                            <h3 className="text-2xl font-bold text-gray-900 mb-2">{dest.name}</h3>
-                            <div className="flex justify-between text-sm text-gray-600 mb-4">
-                              <span>{dest.distance}</span>
-                              <span>{dest.duration}</span>
-                            </div>
-                            <div className="text-sm text-gray-600 mb-4">
-                              <span>Hours: {dest.hours}</span>
-                            </div>
-                          </div>
-
-                          <div className="space-y-3 mb-6">
-                            <p className="font-semibold text-gray-900 mb-2">Highlights:</p>
-                            {dest.highlights.map((highlight, i) => (
-                              <div key={i} className="flex items-center space-x-2 text-sm text-gray-700">
-                                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                <span>{highlight}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <span>{highlight}</span>
+                      </div>
                     ))}
                   </div>
-
-                  {/* Contact Details in Tours Section */}
-                  <div className="grid md:grid-cols-2 gap-8 mt-16">
-                    {/* Map */}
-                    <div className="bg-gray-50 rounded-2xl p-6">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Location</h3>
-                      <div className="rounded-lg overflow-hidden h-80">
-                        <iframe
-                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3604.8010846062!2d79.07197797469352!3d12.229460588021807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bacc177aa9554ab%3A0xcf9414977c2c1018!2sSiva%20Subramaniyar%20Residency!5e1!3m2!1sen!2sin!4v1763541794615!5m2!1sen!2sin"
-                          width="100%"
-                          height="100%"
-                          style={{ border: 0 }}
-                          allowFullScreen
-                          loading="lazy"
-                          referrerPolicy="no-referrer-when-downgrade"
-                        />
-                      </div>
-
-                      <div className="mt-4 px-4">
-                        <h4 className="font-semibold text-gray-900 mb-2 text-center">Address</h4>
-                        <p className="text-gray-600 text-sm text-center leading-relaxed">
-                          107, Ramalinganar St, Tiruvennanallur,<br />
-                          Tiruvannamalai, Tamil Nadu 606601
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Contact Form */}
-                    <div className="bg-white rounded-2xl p-6 border border-gray-200">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-6">Get In Touch</h3>
-                      <form className="space-y-4">
-                        <div className="grid md:grid-cols-2 gap-4">
-                          <input
-                            type="text"
-                            placeholder="Your Name"
-                            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
-                          />
-                          <input
-                            type="email"
-                            placeholder="Your Email"
-                            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
-                          />
-                        </div>
-
-                        <input
-                          type="tel"
-                          placeholder="Phone Number"
-                          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
-                        />
-
-                        <select className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors">
-                          <option>Select Room Type</option>
-                          <option>Family Room</option>
-                          <option>Suite Room</option>
-                          <option>Standard Room</option>
-                        </select>
-
-                        <textarea
-                          rows={4}
-                          placeholder="Your Message"
-                          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors resize-none"
-                        />
-
-                        <button
-                          type="submit"
-                          className="w-full btn-primary py-3"
-                        >
-                          Send Message
-                        </button>
-                      </form>
-
-                      {/* Contact Info */}
-                      <div className="mt-6 pt-6 border-t border-gray-200">
-                        <div className="flex items-center mb-3">
-                          <Phone className="w-5 h-5 text-green-600 mr-3" />
-                          <span className="text-gray-700">+91 98765 43210</span>
-                        </div>
-                        <div className="flex items-center">
-                          <Mail className="w-5 h-5 text-green-600 mr-3" />
-                          <span className="text-gray-700">subramaniresidency@gmail.com</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </section>
-            );
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Contact Details in Tours Section */}
+          <div className="grid md:grid-cols-2 gap-8 mt-16">
+            {/* Map */}
+            <div className="bg-gray-50 rounded-2xl p-6">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Our Location
+              </h3>
+              <div className="rounded-lg overflow-hidden h-80">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3604.8010846062!2d79.07197797469352!3d12.229460588021807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bacc177aa9554ab%3A0xcf9414977c2c1018!2sSiva%20Subramaniyar%20Residency!5e1!3m2!1sen!2sin!4v1763541794615!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+
+              <div className="mt-4 px-4">
+                <h4 className="font-semibold text-gray-900 mb-2 text-center">
+                  Address
+                </h4>
+                <p className="text-gray-600 text-sm text-center leading-relaxed">
+                  107, Ramalinganar St, Tiruvennanallur,
+                  <br />
+                  Tiruvannamalai, Tamil Nadu 606601
+                </p>
+              </div>
+            </div>
+
+            {/* Contact Form */}
+            <div className="bg-white rounded-2xl p-6 border border-gray-200">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                Get In Touch
+              </h3>
+              <form className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Your Email"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+                  />
+                </div>
+
+                <input
+                  type="tel"
+                  placeholder="Phone Number"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+                />
+
+                <select className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors">
+                  <option>Select Room Type</option>
+                  <option>Family Room</option>
+                  <option>Suite Room</option>
+                  <option>Standard Room</option>
+                </select>
+
+                <textarea
+                  rows={4}
+                  placeholder="Your Message"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors resize-none"
+                />
+
+                <button type="submit" className="w-full btn-primary py-3">
+                  Send Message
+                </button>
+              </form>
+
+              {/* Contact Info */}
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <div className="flex items-center mb-3">
+                  <Phone className="w-5 h-5 text-green-600 mr-3" />
+                  <span className="text-gray-700">+91 98765 43210</span>
+                </div>
+                <div className="flex items-center">
+                  <Mail className="w-5 h-5 text-green-600 mr-3" />
+                  <span className="text-gray-700">
+                    subramaniresidency@gmail.com
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
   };
 
   // Gallery Section
@@ -820,7 +987,10 @@ const Index: React.FC = () => {
     const images = [img1, img2, img3, img4, img5, img6, img7, img8];
 
     return (
-      <section id="gallery" className="py-24 px-6 bg-gradient-to-b from-gray-50 to-white">
+      <section
+        id="gallery"
+        className="py-24 px-6 bg-gradient-to-b from-gray-50 to-white"
+      >
         <div className="container mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -861,7 +1031,10 @@ const Index: React.FC = () => {
     const [showContact, setShowContact] = useState(false);
 
     return (
-      <section id="contact" className="py-24 px-6 bg-gradient-to-b from-white to-gray-50">
+      <section
+        id="contact"
+        className="py-24 px-6 bg-gradient-to-b from-white to-gray-50"
+      >
         <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -874,7 +1047,8 @@ const Index: React.FC = () => {
             </h2>
 
             <p className="text-xl text-gray-600 mb-8">
-              Ready to experience comfortable hospitality? Let's connect and make your stay memorable.
+              Ready to experience comfortable hospitality? Let's connect and
+              make your stay memorable.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -899,8 +1073,12 @@ const Index: React.FC = () => {
                 className="bg-white rounded-2xl p-8 shadow-xl border border-gray-200"
               >
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Contact Information</h3>
-                  <p className="text-gray-600">Reach out to us through any of these channels</p>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    Contact Information
+                  </h3>
+                  <p className="text-gray-600">
+                    Reach out to us through any of these channels
+                  </p>
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-8 text-center">
@@ -916,9 +1094,17 @@ const Index: React.FC = () => {
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-800 text-sm break-words hover:underline transition-colors"
                     >
-                      107, Ramalinganar St,<br />Tiruvennanallur,<br />Tiruvannamalai,<br />Tamil Nadu 606601
+                      107, Ramalinganar St,
+                      <br />
+                      Tiruvennanallur,
+                      <br />
+                      Tiruvannamalai,
+                      <br />
+                      Tamil Nadu 606601
                     </a>
-                    <p className="text-xs text-gray-500 mt-2">Click to get directions</p>
+                    <p className="text-xs text-gray-500 mt-2">
+                      Click to get directions
+                    </p>
                   </div>
 
                   {/* Phone */}
@@ -946,9 +1132,13 @@ const Index: React.FC = () => {
                       href="mailto:subramaniresidency@gmail.com"
                       className="text-blue-600 hover:text-blue-800 text-sm break-words hover:underline transition-colors"
                     >
-                      subramaniresidency<br />@gmail.com
+                      subramaniresidency
+                      <br />
+                      @gmail.com
                     </a>
-                    <p className="text-xs text-gray-500 mt-2">Click to send email</p>
+                    <p className="text-xs text-gray-500 mt-2">
+                      Click to send email
+                    </p>
                   </div>
                 </div>
 
@@ -956,7 +1146,9 @@ const Index: React.FC = () => {
                 <div className="mt-8 pt-6 border-t border-gray-200">
                   <div className="grid md:grid-cols-2 gap-6 text-center">
                     <div>
-                      <p className="text-gray-600 mb-2">For reservations and inquiries:</p>
+                      <p className="text-gray-600 mb-2">
+                        For reservations and inquiries:
+                      </p>
                       <p className="text-sm text-gray-800">24/7 available</p>
                     </div>
                     <div>
@@ -999,11 +1191,14 @@ const Index: React.FC = () => {
                     <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                       <Home className="w-5 h-5 text-gray-900" />
                     </div>
-                    <span className="text-2xl font-bold text-white">Subramaniyam Residency</span>
+                    <span className="text-2xl font-bold text-white">
+                      Subramaniyam Residency
+                    </span>
                   </div>
                   <p className="text-gray-300 mb-6">
-                    Your comfortable home away from home in the heart of Tiruvannamalai.
-                    Experience quality hospitality and modern conveniences.
+                    Your comfortable home away from home in the heart of
+                    Tiruvannamalai. Experience quality hospitality and modern
+                    conveniences.
                   </p>
                   <div className="flex space-x-4">
                     <motion.div
@@ -1033,9 +1228,19 @@ const Index: React.FC = () => {
                 <div>
                   <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
                   <ul className="space-y-2">
-                    {['Discover', 'Spaces', 'Essence', 'Exploration', 'Gallery', 'Connect'].map((link) => (
+                    {[
+                      "Discover",
+                      "Spaces",
+                      "Essence",
+                      "Exploration",
+                      "Gallery",
+                      "Connect",
+                    ].map((link) => (
                       <li key={link}>
-                        <a href={`#${link.toLowerCase()}`} className="text-gray-300 hover:text-white transition-colors">
+                        <a
+                          href={`#${link.toLowerCase()}`}
+                          className="text-gray-300 hover:text-white transition-colors"
+                        >
                           {link}
                         </a>
                       </li>
@@ -1046,10 +1251,38 @@ const Index: React.FC = () => {
                 <div>
                   <h4 className="text-lg font-semibold mb-4">Support</h4>
                   <ul className="space-y-2">
-                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Help Center</a></li>
-                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
-                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Terms of Service</a></li>
-                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Contact Support</a></li>
+                    <li>
+                      <a
+                        href="#"
+                        className="text-gray-300 hover:text-white transition-colors"
+                      >
+                        Help Center
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="text-gray-300 hover:text-white transition-colors"
+                      >
+                        Privacy Policy
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="text-gray-300 hover:text-white transition-colors"
+                      >
+                        Terms of Service
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="text-gray-300 hover:text-white transition-colors"
+                      >
+                        Contact Support
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div>
