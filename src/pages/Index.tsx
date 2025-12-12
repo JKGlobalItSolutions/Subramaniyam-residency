@@ -126,8 +126,12 @@ const Index: React.FC = () => {
       >
         <div className="flex flex-col items-center space-y-8">
           <motion.div className="relative">
-            <div className="w-20 h-20 bg-gradient-to-br from-gray-600 to-gray-700 rounded-full flex items-center justify-center shadow-lg">
-              <Home className="w-10 h-10 text-white" />
+            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg p-2">
+              <img
+                src={logoImg}
+                alt="Subramaniyam Residency Logo"
+                className="w-16 h-16 object-contain"
+              />
             </div>
           </motion.div>
 
@@ -265,9 +269,7 @@ const Index: React.FC = () => {
                         ?.scrollIntoView({ behavior: "smooth" });
                       setMobileMenuOpen(false);
                     }}
-                    className={`block w-full text-left py-2 hover:text-green-600 transition-colors font-medium ${
-                      scrolled ? "text-gray-900" : "text-white"
-                    }`}
+                    className="block w-full text-left py-2 hover:text-green-600 transition-colors font-medium text-gray-900"
                   >
                     {item.label}
                   </button>
@@ -819,30 +821,29 @@ const Index: React.FC = () => {
     useEffect(() => {
       if (isPaused) return;
 
-      const scrollSpeed = 1; // pixels per frame
+      const scrollSpeed = 2; // Increased speed: 2 pixels per frame
       const interval = setInterval(() => {
         setScrollPosition((prev) => {
           const newPos = prev + scrollSpeed;
           const maxScroll = (duplicatedAspects.length / 3) * 336; // 320px card + 16px gap
           return newPos >= maxScroll ? 0 : newPos;
         });
-      }, 50);
+      }, 30); // Faster interval: 30ms instead of 50ms
 
       return () => clearInterval(interval);
     }, [isPaused, duplicatedAspects.length]);
 
-    const handleCardClick = () => {
+    const handleCardClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
       setIsPaused(true);
     };
 
-    const handleOutsideClick = (e: React.MouseEvent) => {
-      if (e.target === e.currentTarget) {
-        setIsPaused(false);
-      }
+    const handleOutsideClick = () => {
+      setIsPaused(false);
     };
 
     return (
-      <section className="py-24 px-6 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 overflow-hidden">
+      <section className="py-24 px-6 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
         <div className="container mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -862,24 +863,22 @@ const Index: React.FC = () => {
           <div
             className="relative overflow-hidden cursor-pointer"
             onClick={handleOutsideClick}
-            ref={scrollRef}
+            style={{ height: '420px' }}
           >
             <div
-              className="flex gap-8"
+              className="flex gap-8 py-8"
               style={{
                 transform: `translateX(-${scrollPosition}px)`,
-                transition: isPaused ? 'none' : 'transform 0.05s linear',
+                transition: 'none',
+                width: 'max-content',
               }}
             >
               {duplicatedAspects.map((aspect, index) => (
                 <motion.div
                   key={`${aspect.title}-${index}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleCardClick();
-                  }}
+                  onClick={handleCardClick}
                   whileHover={{ y: -8, scale: 1.02 }}
-                  className="flex-shrink-0 w-80 bg-white rounded-2xl p-8 border-2 border-amber-200 hover:border-orange-400 transition-all duration-500 shadow-lg hover:shadow-2xl"
+                  className="flex-shrink-0 w-80 bg-white rounded-2xl p-8 border-2 border-amber-200 hover:border-orange-400 transition-all duration-500 shadow-lg hover:shadow-2xl cursor-pointer"
                 >
                   <div className="text-center">
                     {aspect.image ? (
@@ -1036,106 +1035,186 @@ const Index: React.FC = () => {
             </p>
           </motion.div>
 
-          {/* Circular Layout */}
-          <div ref={ref} className="relative flex items-center justify-center min-h-[800px]">
-            {/* Central Element */}
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={isVisible ? { scale: 1, opacity: 1 } : {}}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="absolute z-10 bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 rounded-full w-48 h-48 flex items-center justify-center shadow-2xl border-8 border-white"
-            >
-              <div className="text-center text-white">
-                <div className="text-4xl mb-2">🏛️</div>
-                <h3 className="text-lg font-bold leading-tight">
-                  Siva Subramaniyar
-                </h3>
-                <p className="text-sm opacity-90">Residency</p>
-              </div>
-            </motion.div>
+          {/* Circular Layout - Desktop / Grid Layout - Mobile */}
+          <div ref={ref} className="relative">
+            {/* Desktop Circular Layout */}
+            <div className="hidden md:flex items-center justify-center min-h-[800px] relative">
+              {/* Central Element */}
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={isVisible ? { scale: 1, opacity: 1 } : {}}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="absolute z-10 bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 rounded-full w-48 h-48 flex items-center justify-center shadow-2xl border-8 border-white"
+              >
+                <div className="text-center text-white">
+                  <div className="text-4xl mb-2">🏛️</div>
+                  <h3 className="text-lg font-bold leading-tight">
+                    Siva Subramaniyar
+                  </h3>
+                  <p className="text-sm opacity-90">Residency</p>
+                </div>
+              </motion.div>
 
-            {/* Circular Destinations */}
-            {destinations.map((dest, index) => {
-              const angle = (360 / destinations.length) * index;
-              const radius = 300; // Distance from center
-              const x = Math.cos((angle * Math.PI) / 180) * radius;
-              const y = Math.sin((angle * Math.PI) / 180) * radius;
+              {/* Circular Destinations */}
+              {destinations.map((dest, index) => {
+                const angle = (360 / destinations.length) * index;
+                const radius = 300; // Distance from center
+                const x = Math.cos((angle * Math.PI) / 180) * radius;
+                const y = Math.sin((angle * Math.PI) / 180) * radius;
 
-              return (
-                <motion.div
-                  key={index}
-                  initial={{
-                    x: 0,
-                    y: 0,
-                    scale: 0,
-                    opacity: 0
-                  }}
-                  animate={isVisible ? {
-                    x: x,
-                    y: y,
-                    scale: 1,
-                    opacity: 1
-                  } : {}}
-                  transition={{
-                    duration: 1.2,
-                    delay: index * 0.1 + 0.8,
-                    type: "spring",
-                    stiffness: 100
-                  }}
-                  whileHover={{
-                    scale: 1.1,
-                    zIndex: 20,
-                  }}
-                  className="absolute w-64 bg-white rounded-2xl p-6 border-2 border-gray-200 hover:border-blue-400 transition-all duration-500 shadow-lg hover:shadow-2xl"
-                  style={{
-                    transform: `translate(-50%, -50%)`,
-                  }}
-                >
-                  <div className="text-center">
-                    <div
-                      className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold mb-3 ${
-                        dest.difficulty === "Easy"
-                          ? "bg-green-100 text-green-700"
-                          : dest.difficulty === "Moderate"
-                          ? "bg-yellow-100 text-yellow-700"
-                          : "bg-red-100 text-red-700"
-                      }`}
-                    >
-                      {dest.difficulty}
-                    </div>
-
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 leading-tight">
-                      {dest.name}
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-3 font-medium">
-                      {dest.distance}
-                    </p>
-
-                    <div className="space-y-2">
-                      {dest.highlights.slice(0, 2).map((highlight, i) => (
-                        <div
-                          key={i}
-                          className="flex items-center space-x-2 text-xs text-gray-700 justify-center"
-                        >
-                          <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                          <span>{highlight}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Connecting Line */}
-                  <div
-                    className="absolute top-1/2 left-1/2 w-px bg-gradient-to-r from-blue-400 to-transparent transform -translate-x-1/2 -translate-y-1/2"
-                    style={{
-                      width: `${radius - 100}px`,
-                      transform: `translateX(-50%) translateY(-50%) rotate(${angle}deg)`,
-                      transformOrigin: 'left center',
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{
+                      x: 0,
+                      y: 0,
+                      scale: 0,
+                      opacity: 0
                     }}
-                  />
-                </motion.div>
-              );
-            })}
+                    animate={isVisible ? {
+                      x: x,
+                      y: y,
+                      scale: 1,
+                      opacity: 1
+                    } : {}}
+                    transition={{
+                      duration: 1.2,
+                      delay: index * 0.1 + 0.8,
+                      type: "spring",
+                      stiffness: 100
+                    }}
+                    whileHover={{
+                      scale: 1.1,
+                      zIndex: 20,
+                    }}
+                    className="absolute w-64 bg-white rounded-2xl p-6 border-2 border-gray-200 hover:border-blue-400 transition-all duration-500 shadow-lg hover:shadow-2xl"
+                    style={{
+                      transform: `translate(-50%, -50%)`,
+                    }}
+                  >
+                    <div className="text-center">
+                      <div
+                        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold mb-3 ${
+                          dest.difficulty === "Easy"
+                            ? "bg-green-100 text-green-700"
+                            : dest.difficulty === "Moderate"
+                            ? "bg-yellow-100 text-yellow-700"
+                            : "bg-red-100 text-red-700"
+                        }`}
+                      >
+                        {dest.difficulty}
+                      </div>
+
+                      <h3 className="text-lg font-bold text-gray-900 mb-2 leading-tight">
+                        {dest.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 mb-3 font-medium">
+                        {dest.distance}
+                      </p>
+
+                      <div className="space-y-2">
+                        {dest.highlights.slice(0, 2).map((highlight, i) => (
+                          <div
+                            key={i}
+                            className="flex items-center space-x-2 text-xs text-gray-700 justify-center"
+                          >
+                            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                            <span>{highlight}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Connecting Line */}
+                    <div
+                      className="absolute top-1/2 left-1/2 w-px bg-gradient-to-r from-blue-400 to-transparent transform -translate-x-1/2 -translate-y-1/2"
+                      style={{
+                        width: `${radius - 100}px`,
+                        transform: `translateX(-50%) translateY(-50%) rotate(${angle}deg)`,
+                        transformOrigin: 'left center',
+                      }}
+                    />
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Mobile Compact Layout */}
+            <div className="md:hidden space-y-6">
+              {/* Central Element - Compact */}
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={isVisible ? { scale: 1, opacity: 1 } : {}}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 rounded-xl p-4 flex items-center justify-center shadow-2xl mx-auto max-w-xs"
+              >
+                <div className="text-center text-white">
+                  <div className="text-3xl mb-1">🏛️</div>
+                  <h3 className="text-lg font-bold leading-tight">
+                    Siva Subramaniyar
+                  </h3>
+                  <p className="text-xs opacity-90">Residency</p>
+                </div>
+              </motion.div>
+
+              {/* Mobile Wrapped Destinations */}
+              <div className="flex flex-wrap justify-center gap-3">
+                {destinations.map((dest, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{
+                      scale: 0,
+                      opacity: 0
+                    }}
+                    animate={isVisible ? {
+                      scale: 1,
+                      opacity: 1
+                    } : {}}
+                    transition={{
+                      duration: 0.6,
+                      delay: index * 0.08 + 0.8,
+                    }}
+                    whileHover={{
+                      scale: 1.05,
+                    }}
+                    className="bg-white rounded-xl p-4 border-2 border-gray-200 hover:border-blue-400 transition-all duration-500 shadow-lg hover:shadow-2xl min-w-[160px] max-w-[180px] flex-shrink-0"
+                  >
+                    <div className="text-center">
+                      <div
+                        className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold mb-2 ${
+                          dest.difficulty === "Easy"
+                            ? "bg-green-100 text-green-700"
+                            : dest.difficulty === "Moderate"
+                            ? "bg-yellow-100 text-yellow-700"
+                            : "bg-red-100 text-red-700"
+                        }`}
+                      >
+                        {dest.difficulty}
+                      </div>
+
+                      <h3 className="text-sm font-bold text-gray-900 mb-1 leading-tight line-clamp-2">
+                        {dest.name}
+                      </h3>
+                      <p className="text-xs text-gray-600 mb-2 font-medium">
+                        {dest.distance}
+                      </p>
+
+                      <div className="space-y-1">
+                        {dest.highlights.slice(0, 2).map((highlight, i) => (
+                          <div
+                            key={i}
+                            className="flex items-center space-x-1 text-xs text-gray-700 justify-center"
+                          >
+                            <div className="w-1 h-1 bg-blue-500 rounded-full flex-shrink-0"></div>
+                            <span className="text-center leading-tight">{highlight}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Legend */}
@@ -1166,7 +1245,7 @@ const Index: React.FC = () => {
     return (
       <section className="py-24 px-6 bg-gray-50">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 items-start justify-center">
             {/* Map */}
             <div className="bg-white rounded-2xl p-6 shadow-lg">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
