@@ -1474,7 +1474,7 @@ const Index: React.FC = () => {
                       href="tel:9585052446"
                       className="text-blue-600 hover:text-blue-800 text-lg font-medium hover:underline transition-colors"
                     >
-                      9585052446
+                      9894550257
                     </a>
                     <p className="text-xs text-gray-500 mt-2">Click to call</p>
                   </div>
